@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.security.acl.Owner;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -70,7 +71,7 @@ public class Monster {
 			abilityCostPic.add("cost20");
 			abilityCostxNum.add("");
 			
-			memeText = "Mirage's Opinion";
+			memeText = "The heart of the cards is of no use here";
 			return;
 		}
 		else if (name.equalsIgnoreCase("Monster Lord 2")) {
@@ -80,7 +81,7 @@ public class Monster {
 			abilityCostPic.add("cost20");
 			abilityCostxNum.add("");
 			
-			memeText = "Mesa's opinion";
+			memeText = "Money is also of no use here (the devs wish it was)";
 			return;
 		}
 		else if (name.equalsIgnoreCase("Kuriboh")) {
@@ -96,6 +97,34 @@ public class Monster {
 		else if (name.equalsIgnoreCase("Dark Magician")) {
 			hasActivatableAbility = false;
 			memeText = "Look at my long, shiny staff";
+			return;
+		}
+		else if (name.equalsIgnoreCase("Blue Eyes White Dragon")) {
+			hasActivatableAbility = false;
+			memeText = "I can't believe the original creator didn't add this card. Smh my head";
+			return;
+		}
+		else if (name.equalsIgnoreCase("Blue Eyes Ultimate Dragon")) {
+			hasActivatableAbility = false;
+			memeText = "Aren't 3 heads cooler than 1?";
+			return;
+		}
+		else if (name.equalsIgnoreCase("Dark Magician Girl")) {
+			hasActivatableAbility = true;
+			memeText = "Oh, You know who this is ;)";
+			abilityText.add("She heals you, and increases your max Health by 1");
+			abilityCostPic.add("spell1");
+			abilityCostxNum.add("");
+			return;
+		}
+		else if (name.equalsIgnoreCase("Graceful Dice")) {
+			hasActivatableAbility = false;
+			
+			abilityText.add("Get an extra roll each turn");
+			abilityCostPic.add("cost0");
+			abilityCostxNum.add("");
+			
+			memeText = "Oh you better be Grateful for this guy";
 			return;
 		}
 		else if (name.equalsIgnoreCase("Rabidragon")) {
@@ -489,6 +518,7 @@ public class Monster {
 	}
 	
 	public void ability() {
+		//System.out.println(name);
 		if (name.equalsIgnoreCase("Monster Lord 1") || name.equalsIgnoreCase("Monster Lord 2")) {
 			if (owner.atk() + owner.def() + owner.move() + owner.spell() < 20) {
 				JOptionPane.showMessageDialog(null, owner.name() + " (" + owner.color() + "), "
@@ -786,7 +816,21 @@ public class Monster {
  	 				mon.tile().setBorder(BorderFactory.createLineBorder(Color.green, 3));
  				}
 			}
-		}
+		}else if (name.equalsIgnoreCase("Dark Magician Girl")) {
+			if(mainPanel != null && mainPanel.currentPlayer() != null){
+				int r = 2;
+				tiles = mainPanel.getTiles();
+				if(mainPanel.currentPlayer().turnPlayer() == 1){
+					r = tiles.length - 3;
+				}	
+				int c = (tiles.length - 1)/2;
+				//System.out.println(tiles[r][c].monster());
+				tiles[r][c].monster().originalHp = tiles[r][c].monster().originalHp + 1;
+				tiles[r][c].monster().hp = tiles[r][c].monster().originalHp;
+				//System.out.println(tiles[r][c].monster());
+				this.hasActivatableAbility = false;
+				}
+			}
 		else if (name.equalsIgnoreCase("Juunishishi Molmorat") 
 				|| name.equalsIgnoreCase("Juunishishi Thoroughblade")) {
 			if (owner.spell() < 2) {
@@ -1018,27 +1062,32 @@ public class Monster {
 		}
 	}
 	
-	public int rollAbility() {
+	public int rollAbility() { // abilities that affect the roll
+		int extraRolls = 0;
 		if (name.equalsIgnoreCase("Dangerous Machine Type-6")) {
 			if ((int)(Math.random()*4) == 0)	//25%
-				return 0;
+				extraRolls += 0;
 			else {
 				int percent = 1 + (int)(Math.random()*100);
 				if (percent >= 1 && percent <= 33)
-					return 1;
+					extraRolls += 1;
 				else if (percent >= 34 && percent <= 62)
-					return -1;
+					extraRolls -= 1;
 				else if (percent >= 63 && percent <= 81)
-					return 2;
+					extraRolls += 2;
 				else if (percent >= 82 && percent <= 96)
-					return -2;
+					extraRolls -= 2;
 				else if (percent >= 96 && percent <= 99)
-					return 3;
+					extraRolls += 3;
 				else if (percent == 100)
-					return -3;
+					extraRolls -= 3;
 			}
 		}
-		return 0;
+
+		if(name.equalsIgnoreCase("Graceful Dice")){
+			extraRolls += 1;
+		}
+		return extraRolls;
 	}
 	
 	public double moveCost() {	//per tile
