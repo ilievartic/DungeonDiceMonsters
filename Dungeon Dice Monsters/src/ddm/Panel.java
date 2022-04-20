@@ -347,6 +347,7 @@ public class Panel extends JPanel {
 					updateMonsterPanel(monsterToSummon);
 					createPreview();
 					if(monsterToSummon.name() == "Dark Magician Girl"){ // Here you can do on summon abilities
+						//System.out.println("summoned");
 						monsterToSummon.ability();
 					}
 				}
