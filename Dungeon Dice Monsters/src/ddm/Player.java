@@ -79,6 +79,9 @@ public class Player {
 		allMonsters.add(new Monster("King Of The Skull Servants", 1, 0, 0, this, mainPanel, 1));
 		allMonsters.add(new Monster("Juunishishi Molmorat", 5, 0, 0, this, mainPanel, 1));
 		allMonsters.add(new Monster("Juunishishi Thoroughblade", 2, 7, 0, this, mainPanel, 1));
+		allMonsters.add(new Monster("Blue Eyes White Dragon", 60, 20, 5, this, mainPanel, 3));
+		allMonsters.add(new Monster("Blue Eyes Ultimate Dragon", 120, 40, 10, this, mainPanel, 4));
+		allMonsters.add(new Monster("Dark Magician Girl", 25, 20, 5, this, mainPanel, 4));
 		//allMonsters.add(new Monster("Neo Spacian Grand Mole", 10, 1, 0, this, mainPanel, 1));
 		
 	}

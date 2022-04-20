@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Robot;
+import java.awt.AWTException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -70,7 +72,7 @@ public class Panel extends JPanel {
 		setFocusable(true);
 		setLayout(null);
 		setPreferredSize(new Dimension(gameWidth, gameHeight));
-		setBackground(Color.cyan);
+		setBackground(Color.GRAY);
 		init();
 
 		key = new Key();
@@ -316,7 +318,7 @@ public class Panel extends JPanel {
 				        new String[]{"Level 1", "Level 2", "Level 3", "Level 4"}, // this is the array
 				        "default");
 			  monsterLevel = 5;
-			  if (response == 0)
+			  if (response == 0) // MODIFY THIS
 				  monsterLevel = 1;
 			  else if (response == 1)
 				  monsterLevel = 2;
@@ -344,6 +346,10 @@ public class Panel extends JPanel {
 				if (monsterSelectionPopup()) {
 					updateMonsterPanel(monsterToSummon);
 					createPreview();
+					if(monsterToSummon.name() == "Dark Magician Girl"){ // Here you can do on summon abilities
+						//System.out.println("summoned");
+						monsterToSummon.ability();
+					}
 				}
 				else
 					changePhase("Action");
@@ -371,7 +377,7 @@ public class Panel extends JPanel {
 		  }
 		  else if (phase.equalsIgnoreCase("Ability")) {
 			  phaseLabel.setText(abilityMonster.abilityPhaseText());
-			  phaseChangeButton.setText("Carry out the ability");	//IMPLEAMENT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+			  phaseChangeButton.setText("Carry out the ability");
 			  phaseChangeButton.setEnabled(false);
 			  if (abilityMonster.abilityPhaseText().equalsIgnoreCase("~"))
 				  changePhase("Action");
@@ -466,6 +472,7 @@ public class Panel extends JPanel {
 						updateMonsterPanel(monsterToSummon);
 						lastLabelTouchedInGrid = smallMonsterLabels.get(labelIndex);
 					}});
+					//TODO add arrow key support here
 				monsterGridPanel.add(smallMonsterLabels.get(labelIndex));
 			}
 		}
@@ -867,6 +874,7 @@ public class Panel extends JPanel {
 	private class Key implements KeyListener {
 
 		public void keyPressed(KeyEvent e) {
+			System.out.println(phase);
 			
 			if (phase.equalsIgnoreCase("Move")) {
 				
@@ -990,7 +998,7 @@ public class Panel extends JPanel {
 					movePath = new ArrayList<Tile>();
 					return;
 				}
-				if (key == KeyEvent.VK_ENTER) {
+				if (key == KeyEvent.VK_ENTER || key == KeyEvent.VK_SPACE) {
 					
 					if (movePath.size()-1 < 1) {
 			 			JOptionPane.showConfirmDialog(null, 
@@ -1062,9 +1070,7 @@ public class Panel extends JPanel {
 						  tiles[borderingTiles.r(i) + r][borderingTiles.c(i) + c].updatePics();
 					changePhase("Action");		
 				}
-			}
-			
-			
+			}	
 			
 					
 			if (phase.equalsIgnoreCase("Pattern")) {
@@ -1136,7 +1142,7 @@ public class Panel extends JPanel {
 		 			}		
 				}
 				
-				if (key == KeyEvent.VK_ENTER) {	//place a pattern
+				if (key == KeyEvent.VK_ENTER || key == KeyEvent.VK_SPACE) {	//place a pattern
 					int turn = currentPlayer.turnPlayer();
 					
 					boolean friendlyBorder = false;
@@ -1170,6 +1176,78 @@ public class Panel extends JPanel {
 					return;
 				}		
 			}
+			
+			if(phase.equalsIgnoreCase("Action")){
+				int key = e.getKeyCode();
+				if (key == KeyEvent.VK_1) {	// use keyboard instead of mouse
+					try
+					{
+					Robot robot = new Robot();
+					robot.keyRelease(KeyEvent.VK_SPACE);
+					}
+					catch (AWTException ex)
+					{
+					ex.printStackTrace();
+				}
+			}
+				if (key == KeyEvent.VK_ENTER) {	// use keyboard instead of mouse
+					try
+					{
+					Robot robot = new Robot();
+					robot.keyRelease(KeyEvent.VK_SPACE);
+					}
+					catch (AWTException ex)
+					{
+					ex.printStackTrace();
+				}
+			}
+				if (key == KeyEvent.VK_2) {	// use keyboard instead of mouse
+					try
+					{
+					Robot robot = new Robot();
+					robot.keyPress(KeyEvent.VK_TAB);
+					robot.keyRelease(KeyEvent.VK_SPACE);
+					}
+					catch (AWTException ex)
+					{
+					ex.printStackTrace();
+				}
+				if (key == KeyEvent.VK_3) {	// use keyboard instead of mouse
+					try
+					{
+					Robot robot = new Robot();
+					robot.keyPress(KeyEvent.VK_TAB);
+					robot.keyPress(KeyEvent.VK_TAB);
+					robot.keyRelease(KeyEvent.VK_SPACE);
+					}
+					catch (AWTException ex)
+					{
+					ex.printStackTrace();
+					}
+				}
+				if (key == KeyEvent.VK_4) {	// use keyboard instead of mouse
+					try
+					{
+					Robot robot = new Robot();
+					robot.keyPress(KeyEvent.VK_TAB);
+					robot.keyPress(KeyEvent.VK_TAB);
+					robot.keyPress(KeyEvent.VK_TAB);
+					robot.keyRelease(KeyEvent.VK_SPACE);
+					}
+					catch (AWTException ex)
+					{
+					ex.printStackTrace();
+					}
+				}
+					return;
+				}
+			
+		}
+			int key = e.getKeyCode();
+			if (key == KeyEvent.VK_ESCAPE || key == KeyEvent.VK_TAB) {
+				changePhase("End");	
+		   	}
+
 		}
 
 		public void keyReleased(KeyEvent e) {}

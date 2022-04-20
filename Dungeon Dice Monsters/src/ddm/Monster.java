@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.security.acl.Owner;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -70,7 +71,7 @@ public class Monster {
 			abilityCostPic.add("cost20");
 			abilityCostxNum.add("");
 			
-			memeText = "Mirage's Opinion";
+			memeText = "The heart of the cards is of no use here";
 			return;
 		}
 		else if (name.equalsIgnoreCase("Monster Lord 2")) {
@@ -80,7 +81,7 @@ public class Monster {
 			abilityCostPic.add("cost20");
 			abilityCostxNum.add("");
 			
-			memeText = "Mesa's opinion";
+			memeText = "Money is also of no use here (the devs wish it was)";
 			return;
 		}
 		else if (name.equalsIgnoreCase("Kuriboh")) {
@@ -96,6 +97,24 @@ public class Monster {
 		else if (name.equalsIgnoreCase("Dark Magician")) {
 			hasActivatableAbility = false;
 			memeText = "Look at my long, shiny staff";
+			return;
+		}
+		else if (name.equalsIgnoreCase("Blue Eyes White Dragon")) {
+			hasActivatableAbility = false;
+			memeText = "I can't believe the original creator didn't add this card. Smh my head";
+			return;
+		}
+		else if (name.equalsIgnoreCase("Blue Eyes Ultimate Dragon")) {
+			hasActivatableAbility = false;
+			memeText = "Aren't 3 heads cooler than 1?";
+			return;
+		}
+		else if (name.equalsIgnoreCase("Dark Magician Girl")) {
+			hasActivatableAbility = true;
+			memeText = "Oh, You know who this is ;)";
+			abilityText.add("She heals you, and increases your max Health by 1");
+			abilityCostPic.add("spell1");
+			abilityCostxNum.add("");
 			return;
 		}
 		else if (name.equalsIgnoreCase("Rabidragon")) {
@@ -489,6 +508,7 @@ public class Monster {
 	}
 	
 	public void ability() {
+		System.out.println(name);
 		if (name.equalsIgnoreCase("Monster Lord 1") || name.equalsIgnoreCase("Monster Lord 2")) {
 			if (owner.atk() + owner.def() + owner.move() + owner.spell() < 20) {
 				JOptionPane.showMessageDialog(null, owner.name() + " (" + owner.color() + "), "
@@ -786,7 +806,21 @@ public class Monster {
  	 				mon.tile().setBorder(BorderFactory.createLineBorder(Color.green, 3));
  				}
 			}
-		}
+		}else if (name.equalsIgnoreCase("Dark Magician Girl")) {
+			if(mainPanel != null && mainPanel.currentPlayer() != null){
+				int r = 2;
+				tiles = mainPanel.getTiles();
+				if(mainPanel.currentPlayer().turnPlayer() == 1){
+					r = tiles.length - 3;
+				}	
+				int c = (tiles.length - 1)/2;
+				System.out.println(tiles[r][c].monster());
+				tiles[r][c].monster().originalHp = tiles[r][c].monster().originalHp + 1;
+				tiles[r][c].monster().hp = tiles[r][c].monster().originalHp;
+				System.out.println(tiles[r][c].monster());
+				this.hasActivatableAbility = false;
+				}
+			}
 		else if (name.equalsIgnoreCase("Juunishishi Molmorat") 
 				|| name.equalsIgnoreCase("Juunishishi Thoroughblade")) {
 			if (owner.spell() < 2) {

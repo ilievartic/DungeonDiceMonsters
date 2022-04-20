@@ -19,7 +19,7 @@ public class Frame extends JFrame{
 
 	public Frame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Dungeon Dice Monsters - a Furman Production");
+		setTitle("Dungeon Dice Monsters");
 		setResizable(false);
 	    JDialog.setDefaultLookAndFeelDecorated(true);
 		init();
