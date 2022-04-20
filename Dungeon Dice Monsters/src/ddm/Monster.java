@@ -117,7 +117,6 @@ public class Monster {
 			abilityCostxNum.add("");
 			return;
 		}
-<<<<<<< HEAD
 		else if (name.equalsIgnoreCase("Graceful Dice")) {
 			hasActivatableAbility = false;
 			
@@ -128,8 +127,6 @@ public class Monster {
 			memeText = "Oh you better be Grateful for this guy";
 			return;
 		}
-=======
->>>>>>> adcb2397d5a08d875009fd6d16b9f5648ce41b39
 		else if (name.equalsIgnoreCase("Rabidragon")) {
 			hasActivatableAbility = false;
 			
@@ -521,11 +518,7 @@ public class Monster {
 	}
 	
 	public void ability() {
-<<<<<<< HEAD
 		//System.out.println(name);
-=======
-		System.out.println(name);
->>>>>>> adcb2397d5a08d875009fd6d16b9f5648ce41b39
 		if (name.equalsIgnoreCase("Monster Lord 1") || name.equalsIgnoreCase("Monster Lord 2")) {
 			if (owner.atk() + owner.def() + owner.move() + owner.spell() < 20) {
 				JOptionPane.showMessageDialog(null, owner.name() + " (" + owner.color() + "), "
@@ -831,17 +824,10 @@ public class Monster {
 					r = tiles.length - 3;
 				}	
 				int c = (tiles.length - 1)/2;
-<<<<<<< HEAD
 				//System.out.println(tiles[r][c].monster());
 				tiles[r][c].monster().originalHp = tiles[r][c].monster().originalHp + 1;
 				tiles[r][c].monster().hp = tiles[r][c].monster().originalHp;
 				//System.out.println(tiles[r][c].monster());
-=======
-				System.out.println(tiles[r][c].monster());
-				tiles[r][c].monster().originalHp = tiles[r][c].monster().originalHp + 1;
-				tiles[r][c].monster().hp = tiles[r][c].monster().originalHp;
-				System.out.println(tiles[r][c].monster());
->>>>>>> adcb2397d5a08d875009fd6d16b9f5648ce41b39
 				this.hasActivatableAbility = false;
 				}
 			}

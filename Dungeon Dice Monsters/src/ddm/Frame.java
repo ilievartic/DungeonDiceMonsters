@@ -30,7 +30,20 @@ public class Frame extends JFrame{
 		loading();
 		
 		Panel mainPanel = new Panel();
-
+		URL imageURL = getClass().getResource("resources/icon.png");	
+		if (imageURL != null) {
+			ImageIcon imageIcon = new ImageIcon(imageURL);
+			Image image = imageIcon.getImage();
+			if (imageIcon != null){
+				this.setIconImage(image);
+			}
+		}else{
+			System.out.println("imageURL: " + imageURL);
+		JOptionPane.showConfirmDialog(null, "ERROR 1: bad imageURL recieved from Monster class for resources/icon.png\n"
+				+ "Do something about it.", 
+ 				"ERROR", JOptionPane.ERROR_MESSAGE);
+		}
+				 
 		loadWindow.dispose();
 		
 		add(mainPanel);

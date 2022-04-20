@@ -66,6 +66,7 @@ public class Panel extends JPanel {
 	private boolean isAbilityMovement = false;
 	
 	private int monsterLevel = 0;
+	private int iter;
 	
 	
 	public Panel() {
@@ -82,8 +83,8 @@ public class Panel extends JPanel {
 			player2.randomizeName();
 		}
 		
-		for (int R=0; R<tiles.length; R++)	//adds tile recognition to all tiles
-			for (int C=0; C<tiles[0].length; C++) {
+		for (int R = 0; R < tiles.length; R++)	//adds tile recognition to all tiles
+			for (int C = 0; C < tiles[0].length; C++) {
 				final int r69 = R, c69 = C;
 				tiles[r69][c69].addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {   
@@ -311,13 +312,12 @@ public class Panel extends JPanel {
 			  phaseLabel.setText("Roll the dice");
 			  phaseChangeButton.setText("Roll");
 			  phaseChangeButton.setEnabled(false);
-			  int response = JOptionPane.showOptionDialog(null, 
-					  	currentPlayer.name() 
-						+ " (" + currentPlayer.color() + "), chose a level dice to roll", "Roll The Dice", // TODO add key support here
-				        JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, 
-				        new String[]{"Level 1", "Level 2", "Level 3", "Level 4"}, // this is the array
-				        "default");
-			  monsterLevel = 5;
+
+    			int response = JOptionPane.showOptionDialog(null, currentPlayer.name() 
+				+ " (" + currentPlayer.color() + "), chose a level dice to roll", "Roll The Dice",
+				 JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE,null, new Object[]{"Level 1","Level 2","Level 3","Level 4"}, "default");
+			  	//System.out.println(response);
+				monsterLevel = 5;
 			  if (response == 0) // MODIFY THIS
 				  monsterLevel = 1;
 			  else if (response == 1)
@@ -447,9 +447,10 @@ public class Panel extends JPanel {
 		final Border grayBorder = BorderFactory.createLineBorder(Color.gray, 2);
 		
 		final ArrayList <JLabel> smallMonsterLabels = new ArrayList<JLabel>();
-		for (int i=0; i<currentPlayer.allMonsters().size(); i++) {
+		for (int i = 0; i < currentPlayer.allMonsters().size(); i++) {
 			if (currentPlayer.allMonsters().get(i).level() == monsterLevel) {
 				final int monsterIndex = i, labelIndex = smallMonsterLabels.size();
+				iter = monsterIndex;
 				smallMonsterLabels.add(new JLabel());
 				//smallMonsterLabels.get(labelIndex).setPreferredSize(new Dimension(60, 60));
 				smallMonsterLabels.get(labelIndex).setIcon(currentPlayer.allMonsters().get(monsterIndex)
@@ -472,7 +473,27 @@ public class Panel extends JPanel {
 						updateMonsterPanel(monsterToSummon);
 						lastLabelTouchedInGrid = smallMonsterLabels.get(labelIndex);
 					}});
-					//TODO add arrow key support here
+
+					/*smallMonsterLabels.get(labelIndex).setFocusable(true);
+					smallMonsterLabels.get(labelIndex).requestFocus();
+					smallMonsterLabels.get(labelIndex).addKeyListener(new KeyListener() {
+					  public void keyPressed(KeyEvent e) {
+						  System.out.println(e.getKeyChar());
+						  if(e.getKeyCode() == KeyEvent.VK_SPACE ){
+							  int prev = iter;
+							  iter = (iter + 1) % currentPlayer.allMonsters().size();
+							  smallMonsterLabels.get(iter).setBorder(BorderFactory.createLineBorder(Color.green, 2));
+							  monsterToSummon = currentPlayer.allMonsters().get(iter);
+							  updateMonsterPanel(monsterToSummon);
+							  lastLabelTouchedInGrid = smallMonsterLabels.get(prev);
+							  
+						  }	
+					 } 
+					 public void keyReleased(KeyEvent e) {System.out.println(e.getKeyChar());}
+		  
+					 public void keyTyped(KeyEvent e) {System.out.println(e.getKeyChar());}
+		  
+				  });*/
 				monsterGridPanel.add(smallMonsterLabels.get(labelIndex));
 			}
 		}
@@ -580,7 +601,7 @@ public class Panel extends JPanel {
 				r = myTile.r();
 				c = myTile.c();
 				
-				for (int i=0; i<4; i++){	//change pattern for ranged attackers
+				for (int i = 0; i < 4; i++){	//change pattern for ranged attackers
 					Tile temp = tiles[borderingTiles.r(i) + r][borderingTiles.c(i) + c];
 					
 					if (temp.monster() != null
@@ -1244,7 +1265,7 @@ public class Panel extends JPanel {
 			
 		}
 			int key = e.getKeyCode();
-			if (key == KeyEvent.VK_ESCAPE || key == KeyEvent.VK_TAB) { //TODO figure out why tab doesnt work
+			if (key == KeyEvent.VK_ESCAPE || key == KeyEvent.VK_SPACE) {
 				changePhase("End");	
 		   	}
 

@@ -56,33 +56,38 @@ public class Player {
 	}
 	
 	public void setUpAllMonsters() {
+		// level 1
 		allMonsters.add(new Monster("Kuriboh", 15, 10, 10, this, mainPanel, 1));
-		allMonsters.add(new Monster("Uraby", 25, 25, 10, this, mainPanel, 2));
-		allMonsters.add(new Monster("Dark Magician", 35, 40, 20, this, mainPanel, 3));
-		allMonsters.add(new Monster("Rabidragon", 60, 40, 40, this, mainPanel, 4));
 		allMonsters.add(new Monster("Labyrinth Wall", 45, 0, 0, this, mainPanel, 1));
-		allMonsters.add(new Monster("Mr. Volcano", 15, 15, 5, this, mainPanel, 2));
-		allMonsters.add(new Monster("Wall Shadow", 10, 25, 0, this, mainPanel, 2));
 		allMonsters.add(new Monster("Dangerous Machine Type-6", 15, 0, 0, this, mainPanel, 1));
 		allMonsters.add(new Monster("Overdrive", 5, 8, 8, this, mainPanel, 1));
-		allMonsters.add(new Monster("Gandora The Dragon Of Destruction", 2, 25, 0, this, mainPanel, 3));
-		allMonsters.add(new Monster("Interplanetarypurplythorny Dragon", 15, 15, 10, this, mainPanel, 2));
-		allMonsters.add(new Monster("Interplanetarypurplythorny Beast", 25, 8, 10, this, mainPanel, 2));
-		allMonsters.add(new Monster("TRUE KING V.F.D, THE BEAST", 30, 21, 5, this, mainPanel, 4));
 		allMonsters.add(new Monster("Shining Friendship", 5, 2, 0, this, mainPanel, 1));
 		allMonsters.add(new Monster("Penguin Soldier", 8, 8, 5, this, mainPanel, 1));
-		allMonsters.add(new Monster("Madolche Queen Tiaramisu", 999, 999, 999, this, mainPanel, 5));
-		allMonsters.add(new Monster("Gameciel, The Sea Turtle Kaiju", 20, 20, 15, this, mainPanel, 3));
-		allMonsters.add(new Monster("Blackwing - Shura The Blue Flame", 15, 21, 10, this, mainPanel, 2));
-		allMonsters.add(new Monster("Blackwing - Gale The Whirlwind", 15, 15, 8, this, mainPanel, 2));
-		allMonsters.add(new Monster("Junk Synchron", 15, 15, 10, this, mainPanel, 2));
 		allMonsters.add(new Monster("King Of The Skull Servants", 1, 0, 0, this, mainPanel, 1));
 		allMonsters.add(new Monster("Juunishishi Molmorat", 5, 0, 0, this, mainPanel, 1));
 		allMonsters.add(new Monster("Juunishishi Thoroughblade", 2, 7, 0, this, mainPanel, 1));
+		//level 2
+		allMonsters.add(new Monster("Uraby", 25, 25, 10, this, mainPanel, 2));
+		allMonsters.add(new Monster("Mr. Volcano", 15, 15, 5, this, mainPanel, 2));
+		allMonsters.add(new Monster("Wall Shadow", 10, 25, 0, this, mainPanel, 2));
+		allMonsters.add(new Monster("Interplanetarypurplythorny Dragon", 15, 15, 10, this, mainPanel, 2));
+		allMonsters.add(new Monster("Interplanetarypurplythorny Beast", 25, 8, 10, this, mainPanel, 2));
+		allMonsters.add(new Monster("Blackwing - Shura The Blue Flame", 15, 21, 10, this, mainPanel, 2));
+		allMonsters.add(new Monster("Blackwing - Gale The Whirlwind", 15, 15, 8, this, mainPanel, 2));
+		allMonsters.add(new Monster("Junk Synchron", 15, 15, 10, this, mainPanel, 2));
+		//level 3
+		allMonsters.add(new Monster("Dark Magician", 35, 40, 20, this, mainPanel, 3));
+		allMonsters.add(new Monster("Gandora The Dragon Of Destruction", 2, 25, 0, this, mainPanel, 3));
+		allMonsters.add(new Monster("Gameciel, The Sea Turtle Kaiju", 20, 20, 15, this, mainPanel, 3));
 		allMonsters.add(new Monster("Blue Eyes White Dragon", 60, 20, 5, this, mainPanel, 3));
+		allMonsters.add(new Monster("Graceful Dice", 5, 10, 12, this, mainPanel, 3));
+		//level 4
+		allMonsters.add(new Monster("Rabidragon", 60, 40, 40, this, mainPanel, 4));
+		allMonsters.add(new Monster("TRUE KING V.F.D, THE BEAST", 30, 21, 5, this, mainPanel, 4));
 		allMonsters.add(new Monster("Blue Eyes Ultimate Dragon", 120, 40, 10, this, mainPanel, 4));
 		allMonsters.add(new Monster("Dark Magician Girl", 25, 20, 5, this, mainPanel, 4));
-		allMonsters.add(new Monster("Graceful Dice", 5, 10, 12, this, mainPanel, 3));
+		// other
+		allMonsters.add(new Monster("Madolche Queen Tiaramisu", 999, 999, 999, this, mainPanel, 5));
 		//allMonsters.add(new Monster("Neo Spacian Grand Mole", 10, 1, 0, this, mainPanel, 1));
 		
 	}
